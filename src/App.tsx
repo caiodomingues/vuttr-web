@@ -1,25 +1,95 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Card from "./components/Card";
+import api from "./services/api";
+import { Tool } from "./types";
+import { Main } from "./styles";
 
 function App() {
+  const [tools, setTools] = useState<Tool[]>([]);
+  const [tagsOnly, setTagsOnly] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+
+  useEffect(() => {
+    const data = async () => {
+      return await api
+        .get("tools")
+        .then((res) => {
+          setTools([...res.data.data]);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    };
+
+    data();
+  }, []);
+
+  const handleAddTool = () => {
+    api
+      .post("tools", {
+        title: "Caio Domingues",
+        description: "Lorem ipsum dolor sit amet.",
+        link: "https://caiodomingues.com",
+        tags: ["php"],
+      })
+      .then((res) => {
+        setTools([...tools, res.data]);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
+
+  const handleDeleteTool = (id: number) => {
+    api
+      .delete("tools/" + id)
+      .then((res) => {
+        if (res.status === 204) {
+          setTools(
+            tools.filter((tool) => {
+              return tool.id !== id;
+            })
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Main>
+      <h1>VUTTR</h1>
+      <h2>Very Useful Tools to Remember</h2>
+      <nav>
+        <div>
+          <input
+            type="text"
+            name="Search"
+            id="search"
+            value={search}
+            onChange={(evt) => setSearch(evt.target.value)}
+            placeholder="search"
+          />
+          <input
+            type="checkbox"
+            name="Tag only"
+            id="tag-only"
+            checked={tagsOnly}
+            onChange={(evt) => setTagsOnly(evt.target.checked)}
+          />
+          <label htmlFor="tag-only">search in tags only</label>
+        </div>
+        <button onClick={handleAddTool}>+ Add</button>
+      </nav>
+      {tools.map((tool, index) => (
+        <Card
+          key={index}
+          tool={tool}
+          handleDeleteTool={() => handleDeleteTool(tool.id)}
+        />
+      ))}
+    </Main>
   );
 }
 
