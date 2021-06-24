@@ -17,7 +17,13 @@ export const Container = styled.div`
     a {
       text-align: left;
       font: normal normal 600 30px/36px "Source Sans Pro";
+      color: #365df0;
       letter-spacing: 0.6px;
+
+      @media screen and (max-width: 525px) {
+        font-size: 24px;
+        line-height: 30px;
+      }
     }
 
     button {
@@ -29,6 +35,11 @@ export const Container = styled.div`
       border: none;
 
       cursor: pointer;
+
+      &:disabled {
+        color: #fcaeac;
+        cursor: not-allowed;
+      }
     }
 
     .remove {
@@ -36,5 +47,10 @@ export const Container = styled.div`
       width: 10px;
       height: 10px;
     }
+  }
+
+  span {
+    margin-right: 8px;
+    font-weight: 600;
   }
 `;

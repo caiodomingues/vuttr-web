@@ -3,6 +3,7 @@ import Card from "./components/Card";
 import api from "./services/api";
 import { Tool } from "./types";
 import { Main } from "./styles";
+import Modal from "react-modal";
 
 function App() {
   const [tools, setTools] = useState<Tool[]>([]);
@@ -71,14 +72,16 @@ function App() {
             onChange={(evt) => setSearch(evt.target.value)}
             placeholder="search"
           />
-          <input
-            type="checkbox"
-            name="Tag only"
-            id="tag-only"
-            checked={tagsOnly}
-            onChange={(evt) => setTagsOnly(evt.target.checked)}
-          />
-          <label htmlFor="tag-only">search in tags only</label>
+          <div id="checkbox">
+            <input
+              type="checkbox"
+              name="Tag only"
+              id="tag-only"
+              checked={tagsOnly}
+              onChange={(evt) => setTagsOnly(evt.target.checked)}
+            />
+            <label htmlFor="tag-only">search in tags only</label>
+          </div>
         </div>
         <button onClick={handleAddTool}>+ Add</button>
       </nav>

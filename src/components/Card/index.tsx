@@ -25,8 +25,8 @@ function Card({ tool, handleDeleteTool, children }: CardProps) {
         </button>
       </div>
       <p>{description}</p>
-      {tags.map(({ name }, index) => (
-        <b key={index}>{name}</b>
+      {tags.map((tag, index) => (
+        <span key={index}>#{tag}</span>
       ))}
     </Container>
   );
