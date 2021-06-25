@@ -1,18 +1,25 @@
-import React, { useState, useEffect, FormEvent } from "react";
-import Card from "./components/Card";
-import api from "./services/api";
-import { Tool } from "./types";
-import { Main } from "./styles";
+import { useState, useEffect, FormEvent } from "react";
 import Modal from "react-modal";
 
-Modal.setAppElement("#root");
+import api from "./services/api";
+
+import Card from "./components/Card";
+import CreateToolModal from "./components/Modals/CreateToolModal";
+import RemoveToolModal from "./components/Modals/RemoveToolModal";
+
+import { ReactComponent as Search } from "./assets/img/icon-search.svg";
+
+import { Tool } from "./types";
+import { Main } from "./styles";
+
+Modal.setAppElement(document?.getElementById("root")!);
 
 function App() {
   const [tools, setTools] = useState<Tool[]>([]);
   const [tagsOnly, setTagsOnly] = useState<boolean>(false);
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>("");
 
   const [id, setId] = useState<number>(0);
   const [name, setName] = useState<string>("");
@@ -23,19 +30,19 @@ function App() {
   const [tagError, setTagError] = useState<string>("");
 
   useEffect(() => {
-    const data = async () => {
-      return await api
-        .get("tools")
-        .then((res) => {
-          setTools([...res.data.data]);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-    };
-
-    data();
+    loadTools();
   }, []);
+
+  const loadTools = async () => {
+    return await api
+      .get("tools")
+      .then((res) => {
+        setTools([...res.data.data]);
+      })
+      .catch((err) => {
+        //
+      });
+  };
 
   const handleAddTool = (evt: FormEvent) => {
     evt.preventDefault();
@@ -57,8 +64,10 @@ function App() {
         setTagError("");
       })
       .catch((err) => {
-        console.log(err.response.data);
-        if (err.response.data.message_raw.slice(0, 13) === "Tag not found") {
+        if (
+          err.response &&
+          err.response.data.message_raw.slice(0, 13) === "Tag not found"
+        ) {
           setTagError(err.response.data.message_raw);
         }
       });
@@ -81,7 +90,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        //
       });
   };
 
@@ -108,21 +117,52 @@ function App() {
     setTagError("");
   };
 
+  const handleSearch = (search: string) => {
+    if (!search) {
+      loadTools();
+    }
+
+    if (tagsOnly) {
+      setTools(
+        tools.filter((obj: { [key: string]: any }) => {
+          return obj.tags.some((val: string) => {
+            return val.includes(search);
+          });
+        })
+      );
+    } else {
+      setTools(
+        tools.filter((obj: { [key: string]: any }) => {
+          return Object.keys(obj).some(function (key) {
+            return typeof obj[key] === "object"
+              ? obj[key].some((val: string) => {
+                  return val.includes(search);
+                })
+              : obj[key].toString().includes(search);
+          });
+        })
+      );
+    }
+  };
+
   return (
     <Main>
       <h1>VUTTR</h1>
       <h2>Very Useful Tools to Remember</h2>
       <nav>
         <div>
-          <input
-            type="text"
-            name="Search"
-            id="search"
-            value={search}
-            onChange={(evt) => setSearch(evt.target.value)}
-            placeholder="search"
-          />
-          <div id="checkbox">
+          <div id="search-container">
+            <Search />
+            <input
+              type="text"
+              name="Search"
+              id="search"
+              onChange={(evt) => handleSearch(evt.target.value)}
+              placeholder="Digite o que está procurando..."
+              autoComplete="off"
+            />
+          </div>
+          <div id="checkbox-container">
             <input
               type="checkbox"
               name="Tag only"
@@ -142,86 +182,27 @@ function App() {
           handleDeleteTool={() => handleOpenDeleteModal(tool.id, tool.title)}
         />
       ))}
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={handleCloseModal}
-        contentLabel="Add modal"
-        className="modal"
-        overlayClassName="overlay"
-      >
-        <form onSubmit={handleAddTool}>
-          <h4>+ Add new tool</h4>
-          <div className="input-group">
-            <label htmlFor="toolName">
-              Tool name <span className="required">*</span>
-            </label>
-            <input
-              onChange={(evt) => setName(evt.target.value)}
-              type="text"
-              name="tool name"
-              id="toolName"
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="toolLink">
-              Tool link <span className="required">*</span>
-            </label>
-            <input
-              onChange={(evt) => setLink(evt.target.value)}
-              type="text"
-              name="tool link"
-              id="toolLink"
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="toolName">
-              Tool description <span className="required">*</span>
-            </label>
-            <textarea
-              onChange={(evt) => setDescription(evt.target.value)}
-              rows={4}
-              name="tool description"
-              id="toolDescription"
-              required
-            ></textarea>
-          </div>
-          <div className="input-group">
-            <label htmlFor="tags">
-              Tags <span className="required">*</span>
-            </label>
-            <input
-              onChange={(evt) => setTags(evt.target.value)}
-              type="text"
-              name="tags"
-              id="tags"
-              className={tagError && "error-input"}
-              required
-            />
-            {tagError && <p className="error">{tagError}</p>}
-          </div>
-          <button type="submit">Add tool</button>
-        </form>
-      </Modal>
-      <Modal
-        isOpen={deleteModalOpen}
-        onRequestClose={handleCloseDeleteModal}
-        contentLabel="Delete modal"
-        className="modal"
-        overlayClassName="overlay"
-      >
-        <form onSubmit={(evt) => handleDeleteTool(evt, id)}>
-          <h4>x Remove tool</h4>
-          <p>Are you sure you want to remove {name}</p>
-          <button className="danger" type="submit">
-            Yes, remove
-          </button>
-          <button className="secondary" type="button">
-            Cancel
-          </button>
-        </form>
-      </Modal>
+      <CreateToolModal
+        props={{
+          modalOpen,
+          handleCloseModal,
+          handleAddTool,
+          setName,
+          setDescription,
+          setLink,
+          setTags,
+          tagError,
+        }}
+      />
+      <RemoveToolModal
+        props={{
+          deleteModalOpen,
+          handleCloseDeleteModal,
+          handleDeleteTool,
+          id,
+          name,
+        }}
+      />
     </Main>
   );
 }

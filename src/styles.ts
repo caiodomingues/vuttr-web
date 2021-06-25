@@ -30,10 +30,50 @@ export const Main = styled.main`
 
     div {
       display: flex;
+      flex: 1 1 600px;
     }
 
-    #checkbox {
+    #search-container {
+      display: inline-flex;
+      flex: 1 1 300px;
+      position: relative;
+      border: 1px solid #ebeaed;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #f5f4f6 0% 0% no-repeat padding-box;
+      margin-right: 12px;
+
+      svg {
+        width: 20px;
+        height: 23px;
+        align-self: center;
+        margin-left: 16px;
+        margin-right: 12px;
+      }
+
+      input {
+        border: 0;
+        padding: 13px 0px 11px 0px;
+        flex: 1;
+        width: 100%;
+        background: #f5f4f6 0% 0% no-repeat padding-box;
+
+        text-align: left;
+        font: normal normal normal 16px/20px "Source Sans Pro";
+        letter-spacing: 0px;
+        color: #170c3a;
+      }
+    }
+
+    #checkbox-container {
       align-items: center;
+
+      label {
+        text-align: left;
+        font: normal normal normal 16px/20px "Source Sans Pro";
+        letter-spacing: 0.4px;
+        color: #170c3a;
+      }
     }
 
     #tag-only {
@@ -69,28 +109,34 @@ export const Main = styled.main`
       border-radius: 5px;
       padding: 13px 25px;
     }
-
-    #search {
-      margin-right: 12px;
-    }
   }
 
-  @media screen and (max-width: 1500px) {
+  @media screen and (max-width: 1600px) {
     padding: 100px 300px;
+    nav {
+      div {
+        flex-direction: row;
+        flex-basis: 400px;
+      }
+    }
   }
 
   @media screen and (max-width: 1100px) {
     padding: 100px 100px;
+    nav {
+      div {
+        flex-direction: row;
+        flex-basis: 300px;
+      }
+    }
   }
 
   @media screen and (max-width: 715px) {
     padding: 100px 50px;
-  }
-
-  @media screen and (max-width: 610px) {
     nav {
       div {
-        flex-direction: column;
+        flex-direction: row;
+        flex-basis: 200px;
       }
     }
   }
@@ -101,14 +147,19 @@ export const Main = styled.main`
 
       div {
         flex-direction: row;
+        flex: 1 1 10px;
         margin-bottom: 16px;
 
         #tag-only {
           align-self: center;
         }
 
-        #search {
-          padding: 0px 10px;
+        #search-container {
+          flex: 1 1 140px;
+
+          input {
+            flex-basis: 50px;
+          }
         }
       }
     }
@@ -118,16 +169,18 @@ export const Main = styled.main`
     nav {
       div {
         flex-direction: column;
-        margin-bottom: 0;
-
-        #search {
-          padding: 10px 10px;
-        }
+        margin-bottom: 8px;
       }
 
-      #checkbox {
+      #checkbox-container {
         flex-direction: row;
         margin: 12px 0px;
+      }
+
+      #search-container {
+        display: flex;
+        flex-direction: row;
+        flex-basis: 50px !important;
       }
     }
   }

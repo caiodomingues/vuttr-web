@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render a card 1`] = `
+<div
+  className="sc-bdnxRM gATyKY"
+>
+  <div>
+    <a
+      href="http://localhost:8000"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Mock tool
+    </a>
+    <button
+      onClick={[Function]}
+    >
+      <svg
+        className="red"
+      >
+        icon-close.svg
+      </svg>
+       remove
+    </button>
+  </div>
+  <p>
+    Lorem ipsum dolor sit amet.
+  </p>
+  <span>
+    #
+    php
+  </span>
+</div>
+`;
+
+exports[`Should render a modal 1`] = `
+<div
+  className="sc-bdnxRM gATyKY"
+>
+  <div>
+    <a
+      href="http://localhost:8000"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Mock tool
+    </a>
+    <button
+      onClick={[Function]}
+    >
+      <svg
+        className="red"
+      >
+        icon-close.svg
+      </svg>
+       remove
+    </button>
+  </div>
+  <p>
+    Lorem ipsum dolor sit amet.
+  </p>
+  <span>
+    #
+    php
+  </span>
+</div>
+`;

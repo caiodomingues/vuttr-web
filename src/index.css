@@ -9,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f4f6;
+  background-color: #fcfcfd;
 }
 
 code {
@@ -22,6 +22,13 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
   outline: none !important;
+}
+
+input:focus-visible,
+.modal input:focus-visible,
+.modal textarea:focus-visible {
+  background: #ebeaed 0% 0% no-repeat padding-box;
+  border: 1px solid #dedce1;
 }
 
 input:active {
@@ -43,9 +50,11 @@ input::placeholder {
   left: 50%;
   top: 50%;
   margin-left: -300px;
-  margin-top: -37vh;
+  margin-top: -45vh;
   box-shadow: 0px 20px 25px #0000001a;
   border-radius: 5px;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .modal h4,
@@ -100,31 +109,56 @@ input::placeholder {
   border-radius: 5px;
   padding: 14px 30px;
   text-align: center;
-  font: normal normal 600 18px/24px Source Sans Pro;
+  font: normal normal 600 18px/24px "Source Sans Pro";
   letter-spacing: 0.36px;
   color: #ffffff;
   border: none;
   cursor: pointer;
 }
 
+.modal button:hover {
+  background-color: #2f55cc;
+}
+
+.modal button:active {
+  background-color: #244aa8;
+}
+
 .modal button.danger {
   background: #f95e5a 0% 0% no-repeat padding-box;
   border-radius: 5px;
   text-align: center;
-  font: normal normal 600 16px/20px Source Sans Pro;
+  font: normal normal 600 16px/20px "Source Sans Pro";
   letter-spacing: 0.36px;
   color: #ffffff;
   padding: 14px 18px;
+  margin: 0;
+}
+
+.modal button.danger:hover {
+  background-color: #cc4c4c;
+}
+
+.modal button.danger:active {
+  background-color: #a53f3f;
 }
 
 .modal button.secondary {
   background: #feefee 0% 0% no-repeat padding-box;
   border-radius: 5px;
   text-align: center;
-  font: normal normal 600 16px/20px Source Sans Pro;
+  font: normal normal 600 16px/20px "Source Sans Pro";
   letter-spacing: 0.36px;
   color: #f95e5a;
   padding: 14px 18px;
+}
+
+.modal button.secondary:hover {
+  background-color: #fcd7d6;
+}
+
+.modal button.secondary:active {
+  background-color: #fcc6c5;
 }
 
 .modal .input-group {
@@ -136,7 +170,7 @@ input::placeholder {
 
 .modal .error {
   text-align: right;
-  font: normal normal normal 16px/20px Source Sans Pro;
+  font: normal normal normal 16px/20px "Source Sans Pro";
   letter-spacing: 0.36px;
   color: #f95e5a;
 }
@@ -160,4 +194,68 @@ input::placeholder {
 .required {
   color: #8f8a9b;
   font-weight: 400;
+}
+
+svg {
+  background: transparent 0% 0% no-repeat padding-box;
+  width: 10px;
+  height: 10px;
+  color: #170c3a;
+}
+
+svg.red {
+  color: #f95e5a;
+}
+
+@media screen and (max-width: 610px) {
+  .modal {
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -15vh;
+    box-shadow: 0px 20px 25px #0000001a;
+    border-radius: 5px;
+  }
+
+  .modal button {
+    margin-right: 12px;
+  }
+}
+
+@media screen and (max-width: 1033px) {
+  .modal {
+    margin-top: -45vh;
+  }
+
+  .modal h4 {
+    font-size: 26px;
+    line-height: 32px;
+    letter-spacing: 0.52px;
+  }
+
+  .modal label {
+    margin-bottom: 16px;
+    font-size: 20px;
+    line-height: 26px;
+    letter-spacing: 0.4px;
+  }
+
+  .modal input {
+    padding: 13px 22px;
+    font: normal normal normal 12px/16px "Source Sans Pro";
+  }
+
+  .modal textarea {
+    font: normal normal normal 12px/16px "Source Sans Pro";
+  }
+
+  .modal button {
+    font: normal normal 600 16px/20px "Source Sans Pro";
+  }
+
+  .modal .input-group {
+    padding: 0px 30px;
+  }
 }

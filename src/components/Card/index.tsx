@@ -21,7 +21,7 @@ function Card({ tool, handleDeleteTool, children }: CardProps) {
           {title}
         </a>
         <button onClick={() => handleDeleteTool(id)}>
-          <Close className="remove" /> remove
+          <Close className="red" /> remove
         </button>
       </div>
       <p>{description}</p>

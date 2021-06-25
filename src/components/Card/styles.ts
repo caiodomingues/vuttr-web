@@ -6,7 +6,7 @@ export const Container = styled.div`
   border: 1px solid #ebeaed;
   border-radius: 5px;
 
-  margin: 16px 0;
+  margin: 32px 0;
   padding: 16px;
 
   div {
@@ -40,12 +40,6 @@ export const Container = styled.div`
         color: #fcaeac;
         cursor: not-allowed;
       }
-    }
-
-    .remove {
-      background: transparent 0% 0% no-repeat padding-box;
-      width: 10px;
-      height: 10px;
     }
   }
 

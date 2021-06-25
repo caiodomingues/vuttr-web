@@ -7,5 +7,5 @@ export type Tool = {
   title: string;
   description: string;
   link: string;
-  tags: Tag[];
+  tags: Array<string>;
 };
