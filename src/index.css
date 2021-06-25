@@ -16,3 +16,148 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.modal:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: none !important;
+}
+
+input:active {
+  background-color: #ebeaed;
+}
+
+input::placeholder {
+  text-align: left;
+  font: normal normal normal 16px/20px "Source Sans Pro";
+  letter-spacing: 0px;
+  color: #8f8a9b;
+}
+
+.modal {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  padding: 16px;
+  width: 600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -300px;
+  margin-top: -37vh;
+  box-shadow: 0px 20px 25px #0000001a;
+  border-radius: 5px;
+}
+
+.modal h4,
+.modal label {
+  color: #170c3a;
+  font-style: normal;
+  font-weight: 600;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.modal h4 {
+  font-size: 26px;
+  line-height: 32px;
+  letter-spacing: 0.52px;
+  margin: 0 12px 24px;
+}
+
+.modal label {
+  margin-bottom: 12px;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0.4px;
+}
+
+.modal input {
+  background: #f5f4f6 0% 0% no-repeat padding-box;
+  border: 1px solid #ebeaed;
+  border-radius: 5px;
+  padding: 13px 22px;
+
+  font: normal normal normal 16px/20px "Source Sans Pro";
+  letter-spacing: 0px;
+  color: #170c3a;
+}
+
+.modal textarea {
+  background: #f5f4f6 0% 0% no-repeat padding-box;
+  border: 1px solid #ebeaed;
+  border-radius: 5px;
+  resize: none;
+  padding: 11px 21px;
+
+  font: normal normal normal 16px/20px "Source Sans Pro";
+  letter-spacing: 0px;
+  color: #170c3a;
+}
+
+.modal button {
+  float: right;
+  margin-right: 30px;
+  background: #365df0 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  padding: 14px 30px;
+  text-align: center;
+  font: normal normal 600 18px/24px Source Sans Pro;
+  letter-spacing: 0.36px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.modal button.danger {
+  background: #f95e5a 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  text-align: center;
+  font: normal normal 600 16px/20px Source Sans Pro;
+  letter-spacing: 0.36px;
+  color: #ffffff;
+  padding: 14px 18px;
+}
+
+.modal button.secondary {
+  background: #feefee 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  text-align: center;
+  font: normal normal 600 16px/20px Source Sans Pro;
+  letter-spacing: 0.36px;
+  color: #f95e5a;
+  padding: 14px 18px;
+}
+
+.modal .input-group {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px;
+  margin-bottom: 24px;
+}
+
+.modal .error {
+  text-align: right;
+  font: normal normal normal 16px/20px Source Sans Pro;
+  letter-spacing: 0.36px;
+  color: #f95e5a;
+}
+
+.modal .error-input {
+  background: #feefee 0% 0% no-repeat padding-box;
+  border: 1px solid #f95e5a;
+  color: #f95e5a;
+  border-radius: 5px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.required {
+  color: #8f8a9b;
+  font-weight: 400;
+}

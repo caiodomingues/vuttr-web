@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-  padding: 100px 250px;
+  padding: 100px 450px;
 
   h1,
   h2 {
@@ -73,6 +73,10 @@ export const Main = styled.main`
     #search {
       margin-right: 12px;
     }
+  }
+
+  @media screen and (max-width: 1500px) {
+    padding: 100px 300px;
   }
 
   @media screen and (max-width: 1100px) {
