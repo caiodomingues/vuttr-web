@@ -1,16 +1,18 @@
-import { SetStateAction } from "react";
+import { FormEvent } from "react";
 import Modal from "react-modal";
+
+type FullDispatch<S> = (value: S | ((prevState: S) => S)) => void;
 
 interface CreateToolModalProps {
   props: {
     modalOpen: boolean;
     tagError: string;
-    handleCloseModal: any;
-    handleAddTool: any;
-    setName: SetStateAction<any>;
-    setDescription: SetStateAction<any>;
-    setLink: SetStateAction<any>;
-    setTags: SetStateAction<any>;
+    handleCloseModal: () => void;
+    handleAddTool: (evt: FormEvent) => void;
+    setName: FullDispatch<string>;
+    setDescription: FullDispatch<string>;
+    setLink: FullDispatch<string>;
+    setTags: FullDispatch<string>;
   };
 }
 
