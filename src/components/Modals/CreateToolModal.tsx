@@ -36,6 +36,8 @@ function CreateToolModal({ props }: CreateToolModalProps) {
             id="toolName"
             required
             autoComplete="off"
+            minLength={1}
+            maxLength={25}
           />
         </div>
         <div className="input-group">
@@ -49,6 +51,8 @@ function CreateToolModal({ props }: CreateToolModalProps) {
             id="toolLink"
             autoComplete="off"
             required
+            minLength={1}
+            maxLength={200}
           />
         </div>
         <div className="input-group">
@@ -61,6 +65,7 @@ function CreateToolModal({ props }: CreateToolModalProps) {
             name="tool description"
             id="toolDescription"
             required
+            maxLength={255}
           ></textarea>
         </div>
         <div className="input-group">
@@ -75,6 +80,8 @@ function CreateToolModal({ props }: CreateToolModalProps) {
             className={props.tagError && "error-input"}
             autoComplete="off"
             required
+            minLength={1}
+            maxLength={255}
           />
           {props.tagError && <p className="error">{props.tagError}</p>}
         </div>
